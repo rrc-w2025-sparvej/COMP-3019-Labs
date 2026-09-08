@@ -217,4 +217,28 @@ const departments = [
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Page content has loaded.");
+
+    const employeeDirectory = document.getElementById("employee-directory");
+
+    departments.forEach((department) => {
+        const departmentSection = document.createElement("section");
+
+        const departmentHeading = document.createElement("h2");
+        departmentHeading.textContent = department.name;
+
+        const employeeList = document.createElement("ul");
+
+        department.employees.forEach((employee) => {
+            const employeeItem = document.createElement("li");
+            employeeItem.textContent = `${employee.firstName} ${employee.lastName}`;
+
+            employeeList.appendChild(employeeItem);
+        });
+
+        departmentSection.appendChild(departmentHeading);
+        departmentSection.appendChild(employeeList);
+
+        employeeDirectory.appendChild(departmentSection);
+    });
 });
+
