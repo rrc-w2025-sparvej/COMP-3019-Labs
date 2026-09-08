@@ -17,3 +17,21 @@ header h1 {
 header p {
     margin-top: 10px;
 }
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+main section {
+    margin-bottom: 30px;
+}
+
+main h2 {
+    margin-bottom: 10px;
+}
+
+main ul {
+    padding-left: 25px;
+}
