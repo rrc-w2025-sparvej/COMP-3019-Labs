@@ -214,3 +214,7 @@ const departments = [
         ]
     }
 ];
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Page content has loaded.");
+});
