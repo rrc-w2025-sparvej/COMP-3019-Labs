@@ -1,0 +1,19 @@
+header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+header img {
+    width: 150px;
+    height: auto;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header p {
+    margin-top: 10px;
+}
