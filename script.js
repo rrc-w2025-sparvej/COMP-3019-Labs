@@ -220,6 +220,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const employeeDirectory = document.getElementById("employee-directory");
 
+    // Set the current year in the footer
+    const currentYear = document.getElementById("current-year");
+    currentYear.textContent = new Date().getFullYear();
+
+
     departments.forEach((department) => {
         const departmentSection = document.createElement("section");
 
