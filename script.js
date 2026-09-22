@@ -247,3 +247,47 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Lab 2.1 - Add Employee Form
+
+document.addEventListener("DOMContentLoaded", () => {
+    const employeeDirectory = document.getElementById("employee-directory");
+
+    // Create form section
+    const formSection = document.createElement("section");
+
+    // Form heading
+    const formHeading = document.createElement("h2");
+    formHeading.textContent = "Add Employee";
+
+    // Create form
+    const form = document.createElement("form");
+
+    // First Name label
+    const firstNameLabel = document.createElement("label");
+    firstNameLabel.textContent = "First Name:";
+    firstNameLabel.setAttribute("for", "first-name");
+
+    // First Name input
+    const firstNameInput = document.createElement("input");
+    firstNameInput.type = "text";
+    firstNameInput.id = "first-name";
+    firstNameInput.name = "firstName";
+
+    // Submit button
+    const submitButton = document.createElement("button");
+    submitButton.type = "submit";
+    submitButton.textContent = "Add Employee";
+
+    // Add elements to form
+    form.appendChild(firstNameLabel);
+    form.appendChild(firstNameInput);
+    form.appendChild(submitButton);
+
+    // Add heading and form to section
+    formSection.appendChild(formHeading);
+    formSection.appendChild(form);
+
+    // Add form at the bottom of the employee directory
+    employeeDirectory.insertAdjacentElement("afterend", formSection);
+});
+
