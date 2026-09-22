@@ -273,6 +273,33 @@ document.addEventListener("DOMContentLoaded", () => {
     firstNameInput.id = "first-name";
     firstNameInput.name = "firstName";
 
+    // Department label
+    const departmentLabel = document.createElement("label");
+    departmentLabel.textContent = "Department:";
+    departmentLabel.setAttribute("for", "department");
+
+    // Department dropdown
+    const departmentSelect = document.createElement("select");
+    departmentSelect.id = "department";
+    departmentSelect.name = "department";
+
+    // Default option
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Select a department";
+
+    departmentSelect.appendChild(defaultOption);
+
+    // Add existing departments to dropdown
+    departments.forEach((department, index) => {
+        const option = document.createElement("option");
+
+        option.value = index;
+        option.textContent = department.name;
+
+        departmentSelect.appendChild(option);
+});
+
     // Submit button
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
@@ -281,6 +308,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add elements to form
     form.appendChild(firstNameLabel);
     form.appendChild(firstNameInput);
+    form.appendChild(departmentLabel);
+    form.appendChild(departmentSelect);
     form.appendChild(submitButton);
 
     // Add heading and form to section
