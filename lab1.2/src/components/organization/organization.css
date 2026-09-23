@@ -1,0 +1,27 @@
+.organization {
+  padding: 30px;
+}
+
+.organization h1 {
+  margin-bottom: 25px;
+}
+
+.organization-list {
+  width: 100%;
+}
+
+.organization-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.organization-name {
+  text-align: left;
+}
+
+.organization-role {
+  text-align: left;
+}
