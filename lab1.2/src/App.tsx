@@ -3,6 +3,7 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import EmployeeDirectory from "./components/employeeDirectory/EmployeeDirectory";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Organization from "./components/organization/Organization";
 
 function App() {
   return (
@@ -11,9 +12,9 @@ function App() {
 
       <Routes>
         <Route path="/employees" element={<EmployeeDirectory />} />
-        <Route path="/organization" element={<div>Organization</div>} />
+        <Route path="/organization" element={<Organization />} />
         <Route path="/" element={<EmployeeDirectory />} />
-      </Routes>
+    </Routes>
 
       <Footer />
     </BrowserRouter>
