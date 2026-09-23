@@ -358,6 +358,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
             return;
         }
+        // Add the new employee to the selected department
+        const selectedDepartmentIndex = Number(selectedDepartment);
+
+        const newEmployee = {
+            firstName: firstName,
+            lastName: ""
+};
+
+departments[selectedDepartmentIndex].employees.push(newEmployee);
+// Display the new employee immediately
+const departmentSections = employeeDirectory.querySelectorAll("section");
+
+const selectedDepartmentSection = Array.from(departmentSections).find(
+    (section) => {
+        const heading = section.querySelector("h2");
+
+        return heading &&
+            heading.textContent === departments[selectedDepartmentIndex].name;
+    }
+);
+
+if (selectedDepartmentSection) {
+    const employeeList = selectedDepartmentSection.querySelector("ul");
+
+    const employeeItem = document.createElement("li");
+    employeeItem.textContent = firstName;
+
+    employeeList.appendChild(employeeItem);
+}
+
+// Clear the form after successful submission
+firstNameInput.value = "";
+departmentSelect.value = "";
+
     });
 
 });
