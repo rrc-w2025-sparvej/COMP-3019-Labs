@@ -247,3 +247,152 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Lab 2.1 - Add Employee Form
+
+document.addEventListener("DOMContentLoaded", () => {
+    const employeeDirectory = document.getElementById("employee-directory");
+
+    // Create form section
+    const formSection = document.createElement("section");
+
+    // Form heading
+    const formHeading = document.createElement("h2");
+    formHeading.textContent = "Add Employee";
+
+    // Create form
+    const form = document.createElement("form");
+
+    // First Name label
+    const firstNameLabel = document.createElement("label");
+    firstNameLabel.textContent = "First Name:";
+    firstNameLabel.setAttribute("for", "first-name");
+
+    // First Name input
+    const firstNameInput = document.createElement("input");
+    firstNameInput.type = "text";
+    firstNameInput.id = "first-name";
+    firstNameInput.name = "firstName";
+
+    // Department label
+    const departmentLabel = document.createElement("label");
+    departmentLabel.textContent = "Department:";
+    departmentLabel.setAttribute("for", "department");
+
+    // Department dropdown
+    const departmentSelect = document.createElement("select");
+    departmentSelect.id = "department";
+    departmentSelect.name = "department";
+
+    // Default option
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Select a department";
+
+    departmentSelect.appendChild(defaultOption);
+
+    // Add existing departments to dropdown
+    departments.forEach((department, index) => {
+        const option = document.createElement("option");
+
+        option.value = index;
+        option.textContent = department.name;
+
+        departmentSelect.appendChild(option);
+});
+
+    // Submit button
+    const submitButton = document.createElement("button");
+    submitButton.type = "submit";
+    submitButton.textContent = "Add Employee";
+
+    // Add elements to form
+    form.appendChild(firstNameLabel);
+    form.appendChild(firstNameInput);
+    form.appendChild(departmentLabel);
+    form.appendChild(departmentSelect);
+    form.appendChild(submitButton);
+
+    // Validation messages
+    const validationMessages = document.createElement("div");
+    validationMessages.id = "validation-messages";
+
+    form.appendChild(validationMessages);
+
+    // Add heading and form to section
+    formSection.appendChild(formHeading);
+    formSection.appendChild(form);
+
+        // Add form at the bottom of the employee directory
+    employeeDirectory.insertAdjacentElement("afterend", formSection);
+
+    // Handle form submission
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        // Clear existing validation messages
+        validationMessages.innerHTML = "";
+
+        const firstName = firstNameInput.value.trim();
+        const selectedDepartment = departmentSelect.value;
+
+        const errors = [];
+
+        // Validate first name
+        if (firstName.length < 3) {
+            errors.push("First Name must be at least 3 characters.");
+        }
+
+        // Validate department
+        if (selectedDepartment === "") {
+            errors.push("Please select a department.");
+        }
+
+        // Show validation messages
+        if (errors.length > 0) {
+            errors.forEach((error) => {
+                const message = document.createElement("p");
+                message.textContent = error;
+
+                validationMessages.appendChild(message);
+            });
+
+            return;
+        }
+        // Add the new employee to the selected department
+        const selectedDepartmentIndex = Number(selectedDepartment);
+
+        const newEmployee = {
+            firstName: firstName,
+            lastName: ""
+};
+
+departments[selectedDepartmentIndex].employees.push(newEmployee);
+// Display the new employee immediately
+const departmentSections = employeeDirectory.querySelectorAll("section");
+
+const selectedDepartmentSection = Array.from(departmentSections).find(
+    (section) => {
+        const heading = section.querySelector("h2");
+
+        return heading &&
+            heading.textContent === departments[selectedDepartmentIndex].name;
+    }
+);
+
+if (selectedDepartmentSection) {
+    const employeeList = selectedDepartmentSection.querySelector("ul");
+
+    const employeeItem = document.createElement("li");
+    employeeItem.textContent = firstName;
+
+    employeeList.appendChild(employeeItem);
+}
+
+// Clear the form after successful submission
+firstNameInput.value = "";
+departmentSelect.value = "";
+
+    });
+
+});
+
