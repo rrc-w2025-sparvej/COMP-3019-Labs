@@ -312,11 +312,53 @@ document.addEventListener("DOMContentLoaded", () => {
     form.appendChild(departmentSelect);
     form.appendChild(submitButton);
 
+    // Validation messages
+    const validationMessages = document.createElement("div");
+    validationMessages.id = "validation-messages";
+
+    form.appendChild(validationMessages);
+
     // Add heading and form to section
     formSection.appendChild(formHeading);
     formSection.appendChild(form);
 
-    // Add form at the bottom of the employee directory
+        // Add form at the bottom of the employee directory
     employeeDirectory.insertAdjacentElement("afterend", formSection);
+
+    // Handle form submission
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        // Clear existing validation messages
+        validationMessages.innerHTML = "";
+
+        const firstName = firstNameInput.value.trim();
+        const selectedDepartment = departmentSelect.value;
+
+        const errors = [];
+
+        // Validate first name
+        if (firstName.length < 3) {
+            errors.push("First Name must be at least 3 characters.");
+        }
+
+        // Validate department
+        if (selectedDepartment === "") {
+            errors.push("Please select a department.");
+        }
+
+        // Show validation messages
+        if (errors.length > 0) {
+            errors.forEach((error) => {
+                const message = document.createElement("p");
+                message.textContent = error;
+
+                validationMessages.appendChild(message);
+            });
+
+            return;
+        }
+    });
+
 });
 
