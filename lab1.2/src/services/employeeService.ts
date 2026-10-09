@@ -30,18 +30,18 @@ export const employeeService = {
 
     const errors: CreateEmployeeResult["errors"] = {};
 
-    // Validate department
+    // Validate that the department exists
     if (!departmentExists) {
       errors.department = "Please select a valid department.";
     }
 
-    // Validate first name
+    // Validate that first name has at least 3 characters
     if (employeeData.firstName.trim().length < 3) {
       errors.firstName =
         "First name must contain at least 3 characters.";
     }
 
-    // Stop if validation failed
+    // Return validation errors
     if (Object.keys(errors).length > 0) {
       return {
         success: false,
@@ -49,7 +49,7 @@ export const employeeService = {
       };
     }
 
-    // Repository handles actual data creation
+    // Repository handles employee creation
     const employee = employeeRepo.createEmployee({
       firstName: employeeData.firstName.trim(),
       lastName: employeeData.lastName.trim(),
@@ -68,5 +68,9 @@ export const employeeService = {
 
   getDepartments() {
     return employeeRepo.getDepartments();
+  },
+
+  getEmployeesByDepartment(departmentId: number): Employee[] {
+    return employeeRepo.getEmployeesByDepartment(departmentId);
   },
 };

@@ -3,16 +3,12 @@ import EmployeeForm from "./EmployeeForm";
 import { employeeService } from "../../services/employeeService";
 
 function EmployeeDirectory() {
-  const [employees, setEmployees] = useState(() =>
-    employeeService.getEmployees()
-  );
+  const [, setRefresh] = useState(0);
 
-  const [departments] = useState(() =>
-    employeeService.getDepartments()
-  );
+  const departments = employeeService.getDepartments();
 
   const refreshEmployees = () => {
-    setEmployees(employeeService.getEmployees());
+    setRefresh((value) => value + 1);
   };
 
   return (
@@ -22,9 +18,8 @@ function EmployeeDirectory() {
       <EmployeeForm onEmployeeAdded={refreshEmployees} />
 
       {departments.map((department) => {
-        const departmentEmployees = employees.filter(
-          (employee) => employee.departmentId === department.id
-        );
+        const departmentEmployees =
+          employeeService.getEmployeesByDepartment(department.id);
 
         return (
           <section key={department.id}>
