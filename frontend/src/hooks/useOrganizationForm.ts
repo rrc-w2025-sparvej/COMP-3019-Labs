@@ -7,7 +7,7 @@ export function useOrganizationForm(onPersonAdded: () => void) {
   const lastName = useFormInput("");
   const role = useFormInput("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Check the first name
@@ -29,7 +29,7 @@ export function useOrganizationForm(onPersonAdded: () => void) {
     }
 
     // Ask the service to create the person
-    const result = organizationService.createPerson(
+    const result = await organizationService.createPerson(
       firstName.value,
       lastName.value,
       role.value

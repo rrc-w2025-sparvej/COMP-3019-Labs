@@ -10,8 +10,8 @@ export type Department = {
   name: string;
 };
 
-// Temporary data storage
-let departments: Department[] = [
+// Temporary employee and department data
+const departments: Department[] = [
   { id: 1, name: "Administration" },
   { id: 2, name: "Audit" },
   { id: 3, name: "Banking Operations" },
@@ -38,21 +38,25 @@ let employees: Employee[] = [
   },
 ];
 
-export const employeeRepo = {
+export const employeeRepository = {
+  // Retrieve all employees
   getEmployees(): Employee[] {
-    return employees;
+    return employees.map((employee) => ({ ...employee }));
   },
 
+  // Retrieve all departments
   getDepartments(): Department[] {
-    return departments;
+    return departments.map((department) => ({ ...department }));
   },
 
+  // Retrieve employees belonging to a department
   getEmployeesByDepartment(departmentId: number): Employee[] {
-    return employees.filter(
-      (employee) => employee.departmentId === departmentId
-    );
+    return employees
+      .filter((employee) => employee.departmentId === departmentId)
+      .map((employee) => ({ ...employee }));
   },
 
+  // Create a new employee
   createEmployee(employee: Omit<Employee, "id">): Employee {
     const newEmployee: Employee = {
       ...employee,
@@ -61,6 +65,6 @@ export const employeeRepo = {
 
     employees = [...employees, newEmployee];
 
-    return newEmployee;
+    return { ...newEmployee };
   },
 };
